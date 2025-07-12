@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import CardList from './CardList.tsx';
 import type { Person } from '../types/person.ts';
+import Button from './Button';
 
 interface SearchState {
   query: string;
@@ -93,12 +94,7 @@ class Search extends Component<SearchProps, SearchState> {
             onChange={this.handleInputChange}
             placeholder="Enter a request, e.g. C-3PO"
           />
-          <button
-            onClick={this.handleSearch}
-            className="border border-gray-300 py-2 px-4 hover:bg-gray-50"
-          >
-            Search
-          </button>
+          <Button onClick={this.handleSearch}>Search</Button>
         </div>
         <div className="w-full mx-auto max-w-3xl pb-8">
           {loading && <p className="text-center text-gray-500">Loading...</p>}
@@ -111,12 +107,12 @@ class Search extends Component<SearchProps, SearchState> {
           )}
         </div>
         <div className="w-full mx-auto max-w-3xl pb-8 text-right">
-          <button
+          <Button
             onClick={() => this.setState({ shouldCrash: true })}
-            className="border border-red-400 py-2 px-4 text-red-600 hover:bg-red-50"
+            variant="danger"
           >
             Error Button
-          </button>
+          </Button>
         </div>
       </>
     );
