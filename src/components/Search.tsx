@@ -15,6 +15,7 @@ interface SearchState {
   results: Person[];
   loading: boolean;
   error: string | null;
+  shouldCrash: boolean;
 }
 
 type SearchProps = object;
@@ -27,6 +28,7 @@ class Search extends Component<SearchProps, SearchState> {
       results: [],
       loading: false,
       error: null,
+      shouldCrash: false,
     };
   }
 
@@ -84,6 +86,9 @@ class Search extends Component<SearchProps, SearchState> {
   };
 
   render() {
+    if (this.state.shouldCrash) {
+      throw new Error('Test crash in render');
+    }
     const { query, results, loading, error } = this.state;
 
     return (
@@ -128,6 +133,14 @@ class Search extends Component<SearchProps, SearchState> {
               ))}
             </ul>
           )}
+        </div>
+        <div className="w-full mx-auto max-w-3xl pb-8 text-right">
+          <button
+            onClick={() => this.setState({ shouldCrash: true })}
+            className="border border-red-400 py-2 px-4 text-red-600 hover:bg-red-50"
+          >
+            Error Button
+          </button>
         </div>
       </>
     );
