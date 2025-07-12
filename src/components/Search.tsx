@@ -1,14 +1,6 @@
 import { Component } from 'react';
-
-interface Person {
-  name: string;
-  gender: string;
-  height: string;
-  mass: string;
-  birth_year: string;
-  eye_color: string;
-  hair_color: string;
-}
+import CardList from './CardList.tsx';
+import type { Person } from '../types/person.ts';
 
 interface SearchState {
   query: string;
@@ -115,23 +107,7 @@ class Search extends Component<SearchProps, SearchState> {
             <p className="text-center text-gray-500">No results found</p>
           )}
           {!loading && !error && results.length > 0 && (
-            <ul className="space-y-4">
-              {results.map((person) => (
-                <li
-                  key={person.name}
-                  className="p-4 border border-gray-200 rounded-md shadow-sm flex gap-2 flex-col md:flex-row"
-                >
-                  <h3 className="font-semibold text-lg w-full md:w-1/3 shrink-0">
-                    {person.name}
-                  </h3>
-                  <p className="text-gray-700 text-sm">
-                    Gender: {person.gender}, Height: {person.height} cm, Mass:{' '}
-                    {person.mass} kg, Birth Year: {person.birth_year}, Eye
-                    Color: {person.eye_color}, Hair Color: {person.hair_color}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <CardList results={results} />
           )}
         </div>
         <div className="w-full mx-auto max-w-3xl pb-8 text-right">
