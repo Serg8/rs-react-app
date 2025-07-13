@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Search from './components/Search';
+import Search from './components/Search/Search.tsx';
 
 class App extends Component {
   render() {
