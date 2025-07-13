@@ -97,7 +97,11 @@ class Search extends Component<SearchProps, SearchState> {
           <Button onClick={this.handleSearch}>Search</Button>
         </div>
         <div className="w-full mx-auto max-w-3xl pb-8">
-          {loading && <p className="text-center text-gray-500">Loading...</p>}
+          {loading && (
+            <div className="flex justify-center items-center py-8">
+              <div className="w-6 h-6 border-4 border-gray-300 border-t-gray-700 rounded-full animate-spin" />
+            </div>
+          )}
           {error && <p className="text-center text-red-500">Error: {error}</p>}
           {!loading && !error && results.length === 0 && (
             <p className="text-center text-gray-500">No results found</p>
