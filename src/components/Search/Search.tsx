@@ -38,8 +38,8 @@ class Search extends Component<SearchProps, SearchState> {
     this.setState({ loading: true, error: null });
 
     const url = trimmed
-      ? `https://swapi.dev/api/people/?search=${encodeURIComponent(trimmed)}`
-      : 'https://swapi.dev/api/people/';
+      ? `https://swapi-api.hbtn.io/api/people/?search=${encodeURIComponent(trimmed)}`
+      : 'https://swapi-api.hbtn.io/api/people/';
 
     try {
       const res = await fetch(url);
