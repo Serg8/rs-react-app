@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import Button from './Button.tsx';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -22,12 +23,18 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     console.error('Caught by ErrorBoundary:', error, errorInfo);
   }
 
+  handleReload = () => {
+    window.location.reload();
+  };
+
   render() {
     if (this.state.hasError) {
       return (
         <div className="text-center py-20 text-red-600">
-          <h2 className="text-xl font-bold">Something went wrong.</h2>
-          <p>Please try again later.</p>
+          <h2 className="text-xl font-bold mb-4">Something went wrong.</h2>
+          <Button onClick={this.handleReload} variant="danger">
+            Reload page
+          </Button>
         </div>
       );
     }
