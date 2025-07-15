@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import type { Person } from '../../types/person';
+import { fetchPeople } from '../../api/swapi';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import Button from '../Button';
@@ -37,17 +38,8 @@ class Search extends Component<SearchProps, SearchState> {
 
     this.setState({ loading: true, error: null });
 
-    const url = trimmed
-      ? `https://swapi.dev/api/people/?search=${encodeURIComponent(trimmed)}`
-      : 'https://swapi.dev/api/people/';
-
     try {
-      const res = await fetch(url);
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      const data = await res.json();
-
+      const data = await fetchPeople(trimmed);
       this.setState({ results: data.results, loading: false });
     } catch (err: unknown) {
       if (err instanceof Error) {
