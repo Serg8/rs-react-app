@@ -29,4 +29,8 @@ describe('CardList component', () => {
     const cards = screen.getAllByTestId('card');
     expect(cards).toHaveLength(mockResults.length);
   });
+  test('Handles empty results array gracefully', () => {
+    render(<CardList results={[]} />);
+    expect(screen.queryAllByTestId('card')).toHaveLength(0);
+  });
 });
