@@ -11,7 +11,7 @@ class CardList extends Component<CardListProps> {
     const { results } = this.props;
 
     return (
-      <div data-testid="card-list" className="space-y-4">
+      <div className="space-y-4">
         {results.map((person) => (
           <Card key={person.name} {...person} />
         ))}
