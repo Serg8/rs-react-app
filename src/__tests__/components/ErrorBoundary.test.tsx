@@ -22,7 +22,7 @@ describe('ErrorBoundary', () => {
         <ProblemComponent />
       </ErrorBoundary>
     );
-    expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
+    expect(screen.getByTestId('error-boundary')).toBeInTheDocument();
   });
 
   test('Logs error to console', () => {

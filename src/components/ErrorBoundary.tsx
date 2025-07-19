@@ -30,7 +30,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="text-center py-20 text-red-600">
+        <div
+          data-testid="error-boundary"
+          className="text-center py-20 text-red-600"
+        >
           <h2 className="text-xl font-bold mb-4">Something went wrong.</h2>
           <Button onClick={this.handleReload} variant="danger">
             Reload page

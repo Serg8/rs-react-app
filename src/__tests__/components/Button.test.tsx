@@ -5,7 +5,11 @@ import Button from '../../components/Button';
 
 test('calls onClick when clicked', async () => {
   const handleClick = jest.fn();
-  render(<Button onClick={handleClick}>Click me</Button>);
-  await userEvent.click(screen.getByText('Click me'));
+  render(
+    <Button onClick={handleClick} data-testid="test-button">
+      Click me
+    </Button>
+  );
+  await userEvent.click(screen.getByTestId('test-button'));
   expect(handleClick).toHaveBeenCalledTimes(1);
 });

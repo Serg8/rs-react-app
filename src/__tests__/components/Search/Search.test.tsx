@@ -25,7 +25,7 @@ describe('Search component', () => {
     const errorButton = screen.getByTestId('error-button');
     await userEvent.click(errorButton);
 
-    expect(screen.getByText(/something went wrong/i)).toBeInTheDocument();
+    expect(screen.getByTestId('error-boundary')).toBeInTheDocument();
     expect(console.error).toHaveBeenCalled();
   });
 });
