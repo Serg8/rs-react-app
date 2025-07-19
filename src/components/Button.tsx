@@ -12,7 +12,7 @@ class Button extends Component<ButtonProps> {
   };
 
   render() {
-    const { onClick, children, variant } = this.props;
+    const { onClick, children, variant, ...rest } = this.props;
 
     const baseClasses = 'py-2 px-4 border';
     const variantClasses =
@@ -21,7 +21,11 @@ class Button extends Component<ButtonProps> {
         : 'border-gray-300 hover:bg-gray-50';
 
     return (
-      <button onClick={onClick} className={`${baseClasses} ${variantClasses}`}>
+      <button
+        onClick={onClick}
+        className={`${baseClasses} ${variantClasses}`}
+        {...rest}
+      >
         {children}
       </button>
     );
