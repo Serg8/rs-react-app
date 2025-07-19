@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import Card from '../components/Card';
+import Card from '../../components/Card.tsx';
 
 describe('Card component', () => {
   test('Displays item name and description correctly', () => {
