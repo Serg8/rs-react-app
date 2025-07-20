@@ -83,6 +83,7 @@ class Search extends Component<SearchProps, SearchState> {
         <SearchResults results={results} loading={loading} error={error} />
         <div className="w-full mx-auto max-w-3xl pb-8 text-right">
           <Button
+            data-testid="error-button"
             onClick={() => this.setState({ shouldCrash: true })}
             variant="danger"
           >

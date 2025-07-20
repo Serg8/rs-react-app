@@ -16,7 +16,10 @@ class Card extends Component<CardProps> {
       this.props;
 
     return (
-      <section className="p-4 border border-gray-200 rounded-md shadow-sm flex gap-2 flex-col md:flex-row">
+      <section
+        data-testid="card"
+        className="p-4 border border-gray-200 rounded-md shadow-sm flex gap-2 flex-col md:flex-row"
+      >
         <h3 className="font-semibold text-lg w-full md:w-1/3 shrink-0">
           {name}
         </h3>
