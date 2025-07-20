@@ -22,6 +22,7 @@ const config: Config = {
     '!src/setupTests.{ts,js}',
     '!src/**/*.d.ts',
   ],
+  coveragePathIgnorePatterns: ['/node_modules/', 'src/main.tsx'],
 };
 
 export default config;
