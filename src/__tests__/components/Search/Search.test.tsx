@@ -35,4 +35,11 @@ describe('Search component', () => {
     const input = screen.getByTestId('search-input') as HTMLInputElement;
     expect(input.value).toBe('');
   });
+
+  test('Displays previously saved search term from localStorage on mount', () => {
+    localStorage.setItem('searchQuery', 'R2-D2');
+    render(<Search />);
+    const input = screen.getByTestId('search-input') as HTMLInputElement;
+    expect(input.value).toBe('R2-D2');
+  });
 });
