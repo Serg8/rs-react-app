@@ -9,6 +9,7 @@ describe('Search component', () => {
 
   beforeEach(() => {
     console.error = jest.fn();
+    localStorage.clear();
   });
 
   afterEach(() => {
@@ -27,5 +28,11 @@ describe('Search component', () => {
 
     expect(screen.getByTestId('error-boundary')).toBeInTheDocument();
     expect(console.error).toHaveBeenCalled();
+  });
+
+  test('Shows empty input when no saved term exists', () => {
+    render(<Search />);
+    const input = screen.getByTestId('search-input') as HTMLInputElement;
+    expect(input.value).toBe('');
   });
 });
