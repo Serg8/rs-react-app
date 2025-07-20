@@ -51,4 +51,15 @@ describe('Search component', () => {
     await userEvent.click(button);
     expect(localStorage.getItem('searchQuery')).toBe('Darth Vader');
   });
+
+  test('Overwrites existing localStorage value when new search is performed', async () => {
+    localStorage.setItem('searchQuery', 'R2-D2');
+    render(<Search />);
+    const input = screen.getByTestId('search-input') as HTMLInputElement;
+    const button = screen.getByTestId('search-button');
+    await userEvent.clear(input);
+    await userEvent.type(input, 'Darth Vader');
+    await userEvent.click(button);
+    expect(localStorage.getItem('searchQuery')).toBe('Darth Vader');
+  });
 });
