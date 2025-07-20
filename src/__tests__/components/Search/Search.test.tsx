@@ -42,4 +42,13 @@ describe('Search component', () => {
     const input = screen.getByTestId('search-input') as HTMLInputElement;
     expect(input.value).toBe('R2-D2');
   });
+
+  test('Saves search term to localStorage when search button is clicked', async () => {
+    render(<Search />);
+    const input = screen.getByTestId('search-input') as HTMLInputElement;
+    const button = screen.getByTestId('search-button');
+    await userEvent.type(input, 'Darth Vader');
+    await userEvent.click(button);
+    expect(localStorage.getItem('searchQuery')).toBe('Darth Vader');
+  });
 });
