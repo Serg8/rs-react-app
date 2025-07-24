@@ -6,12 +6,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'default' | 'danger';
 }
 
-const Button = ({
+function Button({
   onClick,
   children,
   variant = 'default',
   ...rest
-}: ButtonProps) => {
+}: ButtonProps) {
   const baseClasses = 'py-2 px-4 border';
   const variantClasses =
     variant === 'danger'
@@ -27,6 +27,6 @@ const Button = ({
       {children}
     </button>
   );
-};
+}
 
 export default Button;

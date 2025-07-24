@@ -1,14 +1,13 @@
-import type { FC } from 'react';
 import type { Person } from '../../types/person';
 import CardList from '../CardList';
 
-interface Props {
+interface SearchResultsProps {
   results: Person[];
   loading: boolean;
   error: string | null;
 }
 
-const SearchResults: FC<Props> = ({ results, loading, error }) => {
+function SearchResults({ results, loading, error }: SearchResultsProps) {
   return (
     <div className="w-full mx-auto max-w-3xl pb-8">
       {loading && (
@@ -34,6 +33,6 @@ const SearchResults: FC<Props> = ({ results, loading, error }) => {
       )}
     </div>
   );
-};
+}
 
 export default SearchResults;

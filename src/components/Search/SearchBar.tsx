@@ -1,13 +1,13 @@
-import type { FC, ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 import Button from '../Button.tsx';
 
-interface Props {
+interface SearchBarProps {
   query: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSearch: () => void;
 }
 
-const SearchBar: FC<Props> = ({ query, onChange, onSearch }) => {
+function SearchBar({ query, onChange, onSearch }: SearchBarProps) {
   return (
     <div className="w-full flex py-8 justify-center gap-x-4">
       <input
@@ -23,6 +23,6 @@ const SearchBar: FC<Props> = ({ query, onChange, onSearch }) => {
       </Button>
     </div>
   );
-};
+}
 
 export default SearchBar;

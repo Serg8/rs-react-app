@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import Card from './Card';
 import type { Person } from '../types/person.ts';
 
@@ -6,14 +5,14 @@ interface CardListProps {
   results: Person[];
 }
 
-const CardList: FC<CardListProps> = ({ results }) => {
+function CardList({ results }: CardListProps) {
   return (
     <div className="space-y-4">
       {results.map((person) => (
-        <Card key={person.name} {...person} />
+        <Card key={person.url} {...person} />
       ))}
     </div>
   );
-};
+}
 
 export default CardList;

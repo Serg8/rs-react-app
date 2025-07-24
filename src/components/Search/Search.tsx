@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import Button from '../Button';
 
-const Search = () => {
+function Search() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
@@ -76,6 +76,6 @@ const Search = () => {
       </div>
     </>
   );
-};
+}
 
 export default Search;
