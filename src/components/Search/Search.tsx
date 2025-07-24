@@ -1,57 +1,43 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import type { Person } from '../../types/person';
 import { fetchPeople } from '../../api/swapi';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import Button from '../Button';
 
-interface SearchState {
-  query: string;
-  results: Person[];
-  loading: boolean;
-  error: string | null;
-  shouldCrash: boolean;
-}
+const Search = () => {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<Person[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [shouldCrash, setShouldCrash] = useState(false);
 
-type SearchProps = object;
-
-class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-    this.state = {
-      query: '',
-      results: [],
-      loading: false,
-      error: null,
-      shouldCrash: false,
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const savedQuery = localStorage.getItem('searchQuery') || '';
-    this.setState({ query: savedQuery }, this.fetchResults);
-  }
+    setQuery(savedQuery);
+    fetchResults(savedQuery);
+  }, []);
 
-  fetchResults = async () => {
-    const { query } = this.state;
-    const trimmed = query.trim();
-
-    this.setState({ loading: true, error: null });
+  const fetchResults = async (searchTerm: string) => {
+    setLoading(true);
+    setError(null);
 
     try {
-      const data = await fetchPeople(trimmed);
-      this.setState({ results: data.results, loading: false });
+      const data = await fetchPeople(searchTerm);
+      setResults(data.results);
     } catch (err: unknown) {
       if (err instanceof Error) {
-        this.setState({ error: err.message, loading: false });
+        setError(err.message);
       } else {
-        this.setState({ error: 'Unknown error', loading: false });
+        setError('Unknown error');
       }
+    } finally {
+      setLoading(false);
     }
   };
 
-  handleSearch = () => {
-    const trimmed = this.state.query.trim();
+  const handleSearch = () => {
+    const trimmed = query.trim();
 
     if (trimmed === '') {
       localStorage.removeItem('searchQuery');
@@ -59,40 +45,37 @@ class Search extends Component<SearchProps, SearchState> {
       localStorage.setItem('searchQuery', trimmed);
     }
 
-    this.setState({ query: trimmed }, this.fetchResults);
+    setQuery(trimmed);
+    fetchResults(trimmed);
   };
 
-  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ query: event.target.value });
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
   };
 
-  render() {
-    const { query, results, loading, error, shouldCrash } = this.state;
-
-    if (shouldCrash) {
-      throw new Error('Test crash in render');
-    }
-
-    return (
-      <>
-        <SearchBar
-          query={query}
-          onChange={this.handleInputChange}
-          onSearch={this.handleSearch}
-        />
-        <SearchResults results={results} loading={loading} error={error} />
-        <div className="w-full mx-auto max-w-3xl pb-8 text-right">
-          <Button
-            data-testid="error-button"
-            onClick={() => this.setState({ shouldCrash: true })}
-            variant="danger"
-          >
-            Error Button
-          </Button>
-        </div>
-      </>
-    );
+  if (shouldCrash) {
+    throw new Error('Test crash in render');
   }
-}
+
+  return (
+    <>
+      <SearchBar
+        query={query}
+        onChange={handleInputChange}
+        onSearch={handleSearch}
+      />
+      <SearchResults results={results} loading={loading} error={error} />
+      <div className="w-full mx-auto max-w-3xl pb-8 text-right">
+        <Button
+          data-testid="error-button"
+          onClick={() => setShouldCrash(true)}
+          variant="danger"
+        >
+          Error Button
+        </Button>
+      </div>
+    </>
+  );
+};
 
 export default Search;
