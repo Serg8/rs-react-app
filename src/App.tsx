@@ -1,14 +1,12 @@
-import { Component } from 'react';
+import type { FC } from 'react';
 import Search from './components/Search/Search.tsx';
 
-class App extends Component {
-  render() {
-    return (
-      <div data-testid="app" className="container mx-auto px-4">
-        <Search />
-      </div>
-    );
-  }
-}
+const App: FC = () => {
+  return (
+    <div data-testid="app" className="container mx-auto px-4">
+      <Search />
+    </div>
+  );
+};
 
 export default App;
