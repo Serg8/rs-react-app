@@ -23,4 +23,20 @@ describe('Card component', () => {
       )
     ).toBeInTheDocument();
   });
+
+  test('Does not render when name is empty', () => {
+    const { container } = render(
+      <Card
+        name=""
+        gender="female"
+        height="160"
+        mass="45"
+        birth_year="unknown"
+        eye_color="green"
+        hair_color="brown"
+      />
+    );
+
+    expect(container).toBeEmptyDOMElement();
+  });
 });

@@ -1,22 +1,8 @@
-interface CardProps {
-  name?: string;
-  gender?: string;
-  height?: string;
-  mass?: string;
-  birth_year?: string;
-  eye_color?: string;
-  hair_color?: string;
-}
+import type { Person } from '../types/person';
 
-function Card({
-  name,
-  gender,
-  height,
-  mass,
-  birth_year,
-  eye_color,
-  hair_color,
-}: CardProps) {
+function Card(props: Person) {
+  const { name, gender, height, mass, birth_year, eye_color, hair_color } =
+    props;
   if (!name) return null;
   return (
     <section
