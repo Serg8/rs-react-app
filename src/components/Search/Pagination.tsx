@@ -16,7 +16,7 @@ function Pagination({
   if (totalPages <= 1) return null;
 
   const handleClick = (page: number) => {
-    if (page !== currentPage) {
+    if (page >= 1 && page <= totalPages && page !== currentPage) {
       onPageChange(page);
     }
   };
@@ -24,7 +24,15 @@ function Pagination({
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className="flex flex-wrap justify-center mt-6 mb-6 gap-2">
+    <div className="flex flex-wrap justify-center items-center gap-2 mt-6 mb-6">
+      <button
+        className="px-4 py-2 rounded border bg-white text-blue-500 border-blue-500 hover:bg-blue-100 disabled:opacity-50"
+        onClick={() => handleClick(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        Prev
+      </button>
+
       {pages.map((page) => (
         <button
           key={page}
@@ -38,6 +46,14 @@ function Pagination({
           {page}
         </button>
       ))}
+
+      <button
+        className="px-4 py-2 rounded border bg-white text-blue-500 border-blue-500 hover:bg-blue-100 disabled:opacity-50"
+        onClick={() => handleClick(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        Next
+      </button>
     </div>
   );
 }
