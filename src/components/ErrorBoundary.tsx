@@ -1,5 +1,4 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
-import Button from './Button.tsx';
 
 interface ErrorBoundaryProps {
   children?: ReactNode;
@@ -35,9 +34,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
           className="text-center py-20 text-red-600"
         >
           <h2 className="text-xl font-bold mb-4">Something went wrong.</h2>
-          <Button onClick={this.handleReload} variant="danger">
-            Reload page
-          </Button>
         </div>
       );
     }
