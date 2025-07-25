@@ -29,6 +29,7 @@ describe('fetchPeople', () => {
           hair_color: 'blond',
         },
       ],
+      count: 1,
     };
 
     (fetch as jest.Mock).mockResolvedValueOnce({
@@ -54,6 +55,7 @@ describe('fetchPeople', () => {
           hair_color: 'brown',
         },
       ],
+      count: 1,
     };
 
     (fetch as jest.Mock).mockResolvedValueOnce({
@@ -63,8 +65,9 @@ describe('fetchPeople', () => {
 
     const searchTerm = 'Leia Organa';
     const data = await fetchPeople(searchTerm);
+
     expect(fetch).toHaveBeenCalledWith(
-      `https://swapi-api.hbtn.io/api/people/?search=${encodeURIComponent(searchTerm)}`
+      'https://swapi-api.hbtn.io/api/people/?search=Leia+Organa'
     );
     expect(data).toEqual(mockData);
   });

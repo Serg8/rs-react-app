@@ -9,14 +9,17 @@ const API_BASE = 'https://swapi-api.hbtn.io/api/people/';
 
 export const fetchPeople = async (
   searchQuery: string = '',
-  page: number = 1
+  page?: number
 ): Promise<SwapiResponse> => {
   const params = new URLSearchParams();
   if (searchQuery) {
     params.set('search', searchQuery);
   }
-  params.set('page', page.toString());
-  const url = `${API_BASE}?${params.toString()}`;
+  if (page && page !== 1) {
+    params.set('page', page.toString());
+  }
+
+  const url = params.toString() ? `${API_BASE}?${params.toString()}` : API_BASE;
 
   const res = await fetch(url);
 

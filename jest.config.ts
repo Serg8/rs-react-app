@@ -6,6 +6,7 @@ const config: Config = {
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: 'tsconfig.jest.json' }],
   },
+  setupFiles: ['<rootDir>/jest.setup.ts'],
   coverageThreshold: {
     global: {
       statements: 80,
