@@ -6,6 +6,7 @@ import Root from './pages/Root';
 import Search from './components/Search/Search';
 import NotFound from './pages/NotFound';
 import ErrorBoundary from './components/ErrorBoundary';
+import About from './components/About';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Search />,
+      },
+      {
+        path: '/about',
+        element: <About />,
       },
       {
         path: '*',
