@@ -4,18 +4,17 @@ import { fetchPeople } from '../../api/swapi';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import Button from '../Button';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 function Search() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useLocalStorage<string>('searchQuery', '');
   const [results, setResults] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [shouldCrash, setShouldCrash] = useState(false);
 
   useEffect(() => {
-    const savedQuery = localStorage.getItem('searchQuery') || '';
-    setQuery(savedQuery);
-    fetchResults(savedQuery);
+    fetchResults(query);
   }, []);
 
   const fetchResults = async (searchTerm: string) => {
@@ -38,13 +37,6 @@ function Search() {
 
   const handleSearch = () => {
     const trimmed = query.trim();
-
-    if (trimmed === '') {
-      localStorage.removeItem('searchQuery');
-    } else {
-      localStorage.setItem('searchQuery', trimmed);
-    }
-
     setQuery(trimmed);
     fetchResults(trimmed);
   };
