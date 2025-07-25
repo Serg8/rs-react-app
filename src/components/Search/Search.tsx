@@ -7,7 +7,7 @@ import Button from '../Button';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 function Search() {
-  const [query, setQuery] = useLocalStorage<string>('searchQuery', '');
+  const [query, setQuery] = useLocalStorage('searchQuery', '');
   const [results, setResults] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +15,7 @@ function Search() {
 
   useEffect(() => {
     fetchResults(query);
-  }, []);
+  }, [query]);
 
   const fetchResults = async (searchTerm: string) => {
     setLoading(true);
@@ -38,7 +38,6 @@ function Search() {
   const handleSearch = () => {
     const trimmed = query.trim();
     setQuery(trimmed);
-    fetchResults(trimmed);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
