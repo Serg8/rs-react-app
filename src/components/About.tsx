@@ -16,6 +16,7 @@ function About() {
             className="text-blue-500 underline"
             target="_blank"
             rel="noreferrer"
+            data-testid="test-github-link"
           >
             GitHub
           </a>
