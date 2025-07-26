@@ -24,11 +24,15 @@ function Pagination({
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className="flex flex-wrap justify-center items-center gap-2 mt-6 mb-6">
+    <div
+      className="flex flex-wrap justify-center items-center gap-2 mt-6 mb-6"
+      data-testid="test-pagination"
+    >
       <button
         className="px-4 py-2 rounded border bg-white text-blue-500 border-blue-500 hover:bg-blue-100 disabled:opacity-50"
         onClick={() => handleClick(currentPage - 1)}
         disabled={currentPage === 1}
+        data-testid="test-prev"
       >
         Prev
       </button>
@@ -51,6 +55,7 @@ function Pagination({
         className="px-4 py-2 rounded border bg-white text-blue-500 border-blue-500 hover:bg-blue-100 disabled:opacity-50"
         onClick={() => handleClick(currentPage + 1)}
         disabled={currentPage === totalPages}
+        data-testid="test-next"
       >
         Next
       </button>
