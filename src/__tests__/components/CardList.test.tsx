@@ -4,6 +4,7 @@ import CardList from '../../components/CardList.tsx';
 
 const mockResults = [
   {
+    url: 'https://swapi-api.hbtn.io/api/people/1/',
     name: 'Luke Skywalker',
     gender: 'male',
     height: '172',
@@ -13,6 +14,7 @@ const mockResults = [
     hair_color: 'blond',
   },
   {
+    url: 'https://swapi-api.hbtn.io/api/people/5/',
     name: 'Leia Organa',
     gender: 'female',
     height: '150',

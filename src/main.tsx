@@ -1,8 +1,33 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
-import App from './App.tsx';
-import ErrorBoundary from './components/ErrorBoundary.tsx';
+import Root from './pages/Root';
+import Search from './components/Search/Search';
+import NotFound from './pages/NotFound';
+import ErrorBoundary from './components/ErrorBoundary';
+import About from './components/About';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      {
+        index: true,
+        element: <Search />,
+      },
+      {
+        path: '/about',
+        element: <About />,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
+      },
+    ],
+  },
+]);
 
 const root = document.getElementById('root');
 
@@ -10,10 +35,10 @@ if (!root) {
   throw new Error('The root element was not found in the DOM.');
 }
 
-createRoot(root).render(
-  <StrictMode>
+ReactDOM.createRoot(root).render(
+  <React.StrictMode>
     <ErrorBoundary>
-      <App />
+      <RouterProvider router={router} />
     </ErrorBoundary>
-  </StrictMode>
+  </React.StrictMode>
 );
