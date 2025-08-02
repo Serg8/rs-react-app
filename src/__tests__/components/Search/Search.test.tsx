@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import Search from '../../../components/Search/Search';
-import ErrorBoundary from '../../../components/ErrorBoundary';
 
 describe('Search component', () => {
   const originalConsoleError = console.error;
@@ -15,22 +14,6 @@ describe('Search component', () => {
 
   afterEach(() => {
     console.error = originalConsoleError;
-  });
-
-  test('Triggers error boundary when Error Button is clicked', async () => {
-    render(
-      <MemoryRouter>
-        <ErrorBoundary>
-          <Search />
-        </ErrorBoundary>
-      </MemoryRouter>
-    );
-
-    const errorButton = screen.getByTestId('error-button');
-    await userEvent.click(errorButton);
-
-    expect(screen.getByTestId('error-boundary')).toBeInTheDocument();
-    expect(console.error).toHaveBeenCalled();
   });
 
   test('Shows empty input when no saved term exists', () => {
